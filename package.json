@@ -1,0 +1,16 @@
+{
+  "name": "backend-case",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "repository": "git@github.com:ArturHamannRonconi/backend-case.git",
+  "author": "ArturHamannRonconi <arturhronconi@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2"
+  }
+}
