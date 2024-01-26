@@ -5,10 +5,5 @@
   "testRegex": ".*\\.test\\.js$",
   "moduleFileExtensions": ["js"],
   "testPathIgnorePatterns": ["<rootDir>/build/", "<rootDir>/node_modules/"],
-  "transform": {},
-  "collectCoverageFrom": [
-    "**/*-provider.js",
-    "**/*-repository.js",
-    "**/*-controller.js"
-  ]
+  "transform": {}
 }

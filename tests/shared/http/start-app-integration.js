@@ -3,7 +3,7 @@ import app from '../../../src/app.js';
 
 function StartAppIntegration() {
   const server = app.listen(3001);
-  return server;
+  return { server, app };
 }
 
 export default StartAppIntegration;
