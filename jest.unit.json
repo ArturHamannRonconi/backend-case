@@ -1,0 +1,8 @@
+{
+  "rootDir": "tests",
+  "testEnvironment": "node",
+  "testRegex": ".*\\.spec\\.js$",
+  "moduleFileExtensions": ["js"],
+  "testPathIgnorePatterns": ["<rootDir>/build/", "<rootDir>/node_modules/"],
+  "transform": {}
+}

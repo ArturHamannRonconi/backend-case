@@ -1,5 +1,7 @@
-import { PORT } from './config/environment.js';
+import 'express-async-errors';
 
-import { app as server } from './app.js';
+import './shared/config/database-connection.js';
+import { PORT } from './shared/config/environment.js';
+import server from './app.js';
 
-server.listen(PORT, () => console.log('Server running...'));
+server.listen(PORT);
