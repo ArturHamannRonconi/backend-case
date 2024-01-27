@@ -2,22 +2,22 @@ import Param from '../../../src/shared/utils/param.js';
 
 describe('param.spec', () => {
   it('should ARRAY be create array', () => {
-    expect(Param.ARRAY).toBe('array');
+    expect(Param.ARRAY).toEqual('array');
   });
 
   it('should STRING be read string', () => {
-    expect(Param.STRING).toBe('string');
+    expect(Param.STRING).toEqual('string');
   });
 
   it('should NUMBER be create number', () => {
-    expect(Param.NUMBER).toBe('number');
+    expect(Param.NUMBER).toEqual('number');
   });
 
   it('should OBJECT be delete object', () => {
-    expect(Param.OBJECT).toBe('object');
+    expect(Param.OBJECT).toEqual('object');
   });
 
   it('should BOOLEAN be delete boolean', () => {
-    expect(Param.BOOLEAN).toBe('boolean');
+    expect(Param.BOOLEAN).toEqual('boolean');
   });
 });

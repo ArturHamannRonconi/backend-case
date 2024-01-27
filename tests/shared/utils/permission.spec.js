@@ -2,18 +2,22 @@ import Permission from '../../../src/shared/utils/permission.js';
 
 describe('permission.spec', () => {
   it('should CREATE be create permisions', () => {
-    expect(Permission.CREATE).toBe('create');
+    expect(Permission.CREATE).toEqual('create');
   });
 
   it('should READ be read permisions', () => {
-    expect(Permission.READ).toBe('read');
+    expect(Permission.READ).toEqual('read');
   });
 
   it('should CREATE be create permisions', () => {
-    expect(Permission.CREATE).toBe('create');
+    expect(Permission.CREATE).toEqual('create');
   });
 
   it('should DELETE be delete permisions', () => {
-    expect(Permission.DELETE).toBe('delete');
+    expect(Permission.DELETE).toEqual('delete');
+  });
+
+  it('should MANAGE be delete permisions', () => {
+    expect(Permission.MANAGE).toEqual('manage');
   });
 });

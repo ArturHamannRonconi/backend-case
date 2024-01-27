@@ -1,4 +1,4 @@
-import CreateUserEntity from '../domain/user-entity.js';
+import CreateUserEntity from '../domain/create-user-entity.js';
 import UserEmailAlreadyExists from '../../../shared/http/errors/user-email-already-exists.js';
 
 async function CreateUserService(repository, input) {

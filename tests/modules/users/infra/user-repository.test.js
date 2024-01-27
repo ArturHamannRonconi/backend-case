@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { jest } from '@jest/globals';
 
 import '../../../../src/shared/config/database-connection.js';
-import CreateUserEntity from '../../../../src/modules/users/domain/user-entity.js';
+import CreateUserEntity from '../../../../src/modules/users/domain/create-user-entity.js';
 import UserModel from '../../../../src/modules/users/infra/database/user-model.js';
 import UserRepository from '../../../../src/modules/users/infra/database/user-repository.js';
 

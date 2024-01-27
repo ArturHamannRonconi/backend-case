@@ -1,5 +1,5 @@
 import Permission from '../../../../src/shared/utils/permission.js';
-import CreateUserEntity from '../../../../src/modules/users/domain/user-entity.js';
+import CreateUserEntity from '../../../../src/modules/users/domain/create-user-entity.js';
 
 describe('user-entity.spec', () => {
   let dto;

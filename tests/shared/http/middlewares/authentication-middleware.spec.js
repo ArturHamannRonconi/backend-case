@@ -30,7 +30,7 @@ describe('authentication-middleware.spec', () => {
     AuthenticationMiddleware(request, response, next);
 
     expect(next).toHaveBeenCalled();
-    expect(response.userId).toEqual(userId);
+    expect(request.userId).toEqual(userId);
   });
 
   it('should be throw if not has authentication header', async () => {

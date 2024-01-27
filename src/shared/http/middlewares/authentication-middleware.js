@@ -4,9 +4,9 @@ import InvalidToken from '../errors/invalid-token.js';
 
 import { TOKEN_SECRET } from '../../config/environment.js';
 
-async function AuthenticationMiddleware(req, res, next) {
+async function AuthenticationMiddleware(req, _, next) {
   try {
-    const authentication = req.header('Authentication');
+    const authentication = req.header('Authorization');
     if (!authentication) throw InvalidToken();
 
     const [tokenType, token] = authentication.split(' ');
@@ -17,7 +17,7 @@ async function AuthenticationMiddleware(req, res, next) {
 
     const payload = verify(token, TOKEN_SECRET);
 
-    res.userId = payload.id;
+    req.userId = payload.id;
 
     next();
   } catch (error) {

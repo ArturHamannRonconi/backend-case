@@ -2,7 +2,7 @@ import { jest } from '@jest/globals';
 
 import UserRepositoryMock from '../infra/user-repository.mock.js';
 import LoginService from '../../../../src/modules/users/services/login-service.js';
-import CreateUserEntity from '../../../../src/modules/users/domain/user-entity.js';
+import CreateUserEntity from '../../../../src/modules/users/domain/create-user-entity.js';
 
 describe('login-service.spec.spec', () => {
   let input;
