@@ -1,6 +1,7 @@
+import Notification from '../../../shared/utils/notification.js';
 import CreateDocumentEntity from '../domain/create-document-entity.js';
 
-async function UploadDocumentService(repository, uploadProvider, input) {
+async function UploadDocumentService(repository, uploadProvider, notificationProvider, input) {
   const { user, file } = input;
 
   const fileName = await uploadProvider.upload(file);
@@ -11,6 +12,8 @@ async function UploadDocumentService(repository, uploadProvider, input) {
   });
 
   await repository.save(document);
+
+  await notificationProvider.notify(user, Notification.UPLOAD);
 
   return {
     id: document.id,
