@@ -14,8 +14,8 @@ async function CreateUserEntity(dto) {
   const passwordHashed = await hash(dto.password, 12);
 
   const permissions = [
-    Permission.CREATE,
     Permission.READ,
+    Permission.CREATE,
     Permission.UPDATE,
   ];
 
@@ -24,6 +24,7 @@ async function CreateUserEntity(dto) {
   return {
     id: uid(16),
     email: dto.email,
+    isAdmin: dto.isAdmin,
     password: passwordHashed,
     permissions: {
       users: permissions,

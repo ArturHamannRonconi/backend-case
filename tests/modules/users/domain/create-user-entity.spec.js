@@ -16,8 +16,8 @@ describe('user-entity.spec', () => {
     const user = await CreateUserEntity(dto);
 
     const adminPermissions = [
-      Permission.CREATE,
       Permission.READ,
+      Permission.CREATE,
       Permission.UPDATE,
       Permission.DELETE,
     ];
@@ -36,8 +36,8 @@ describe('user-entity.spec', () => {
     const user = await CreateUserEntity(dto);
 
     const adminPermissions = [
-      Permission.CREATE,
       Permission.READ,
+      Permission.CREATE,
       Permission.UPDATE,
     ];
 

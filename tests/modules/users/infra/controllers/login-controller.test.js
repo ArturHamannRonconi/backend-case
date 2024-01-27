@@ -12,7 +12,7 @@ describe('login-controller.test', () => {
   let server;
 
   beforeAll(async () => {
-    const integration = StartAppIntegration();
+    const integration = await StartAppIntegration();
     app = integration.app;
     server = integration.server;
 
@@ -40,8 +40,6 @@ describe('login-controller.test', () => {
       .send(body)
       .expect(StatusCode.OK);
 
-    expect(response.body.tokens).toBeDefined();
-    expect(response.body.tokens.access).toBeDefined();
-    expect(response.body.tokens.refresh).toBeDefined();
+    expect(response.body.token).toBeDefined();
   });
 });

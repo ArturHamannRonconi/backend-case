@@ -1,5 +1,5 @@
 import EmailValidator from '../domain/email-validator.js';
-import TokensGenerator from '../domain/tokens-generator.js';
+import TokenGenerator from '../domain/token-generator.js';
 import PasswordValidator from '../domain/password-validator.js';
 import PasswordComparator from '../domain/password-comparator.js';
 import InvalidCredentials from '../../../shared/http/errors/invalid-credentials.js';
@@ -16,9 +16,9 @@ async function LoginService(repository, input) {
   const isCorrectPassword = await PasswordComparator(password, user.password);
   if (!isCorrectPassword) throw InvalidCredentials();
 
-  const tokens = await TokensGenerator(user.id);
+  const token = await TokenGenerator(user.id);
 
-  return { tokens };
+  return { token };
 }
 
 export default LoginService;

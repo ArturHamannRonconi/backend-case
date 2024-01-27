@@ -1,13 +1,21 @@
-async function UploadDocumentService(repository, input) {
-  // const { user } = input;
+import CreateDocumentEntity from '../domain/create-document-entity.js';
 
-  console.log(input);
+async function UploadDocumentService(repository, uploadProvider, input) {
+  const { user, file } = input;
 
-  // const document = await CreateDocumentEntity(user);
+  const fileName = await uploadProvider.upload(file);
+  const url = await uploadProvider.getUrl(fileName);
 
-  // await repository.save(document);
+  const document = CreateDocumentEntity({
+    user, file, fileName, url,
+  });
 
-  // return { id: document.id };
+  await repository.save(document);
+
+  return {
+    id: document.id,
+    url,
+  };
 }
 
 export default UploadDocumentService;

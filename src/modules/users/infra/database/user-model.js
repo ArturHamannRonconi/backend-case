@@ -4,6 +4,7 @@ const UserModel = model('UserModel', new Schema({
   id: String,
   email: String,
   password: String,
+  isAdmin: Boolean,
   permissions: {
     users: [String],
     documents: [String],

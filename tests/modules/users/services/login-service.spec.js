@@ -29,10 +29,9 @@ describe('login-service.spec.spec', () => {
   it('should be success', async () => {
     const findByEmailSpy = jest.spyOn(repository, 'findByEmail');
 
-    const { tokens } = await LoginService(repository, input);
+    const { token } = await LoginService(repository, input);
 
-    expect(tokens.access).toBeDefined();
-    expect(tokens.refresh).toBeDefined();
+    expect(token).toBeDefined();
     expect(findByEmailSpy).toHaveBeenCalledWith(input.email);
   });
 

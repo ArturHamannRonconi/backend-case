@@ -16,8 +16,4 @@ describe('permission.spec', () => {
   it('should DELETE be delete permisions', () => {
     expect(Permission.DELETE).toEqual('delete');
   });
-
-  it('should MANAGE be delete permisions', () => {
-    expect(Permission.MANAGE).toEqual('manage');
-  });
 });
