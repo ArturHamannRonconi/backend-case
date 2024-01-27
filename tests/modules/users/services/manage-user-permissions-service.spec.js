@@ -3,11 +3,15 @@ import { jest } from '@jest/globals';
 import UserRepositoryMock from '../infra/user-repository.mock.js';
 import CreateUserEntity from '../../../../src/modules/users/domain/create-user-entity.js';
 import ManageUserPermissionsService from '../../../../src/modules/users/services/manage-user-permissions-service.js';
+import NotificationProviderMock from '../../../shared/providers/notification-provider.mock.js';
 
 describe('manage-user-permissions-service.spec', () => {
   let input;
   let user;
   let repository;
+  let notificationProvider;
+
+  const exec = async () => ManageUserPermissionsService(repository, notificationProvider, input);
 
   beforeAll(async () => {
     const admin = await CreateUserEntity({
@@ -37,6 +41,8 @@ describe('manage-user-permissions-service.spec', () => {
       ],
     };
 
+    notificationProvider = NotificationProviderMock();
+
     repository = UserRepositoryMock({
       findById: jest.fn()
         .mockResolvedValue(user),
@@ -47,7 +53,7 @@ describe('manage-user-permissions-service.spec', () => {
 
   it('should be manage user permissions', async () => {
     const spySave = jest.spyOn(repository, 'save');
-    const result = await ManageUserPermissionsService(repository, input);
+    const result = await ManageUserPermissionsService(repository, notificationProvider, input);
 
     expect(spySave).toHaveBeenCalled();
     expect(result.permissions).toEqual(input.permissions);
@@ -55,7 +61,6 @@ describe('manage-user-permissions-service.spec', () => {
 
   it('should be fail if admin user is not admin', async () => {
     input.admin = user;
-    const exec = async () => ManageUserPermissionsService(repository, input);
     await expect(exec).rejects.toThrow();
   });
 
@@ -66,7 +71,6 @@ describe('manage-user-permissions-service.spec', () => {
       .spyOn(repository, 'findById')
       .mockResolvedValueOnce(input.admin);
 
-    const exec = async () => ManageUserPermissionsService(repository, input);
     await expect(exec).rejects.toThrow();
   });
 
@@ -75,13 +79,11 @@ describe('manage-user-permissions-service.spec', () => {
       .spyOn(repository, 'findById')
       .mockResolvedValueOnce(null);
 
-    const exec = async () => ManageUserPermissionsService(repository, input);
     await expect(exec).rejects.toThrow();
   });
 
   it('should be fail if permissions is invalid', async () => {
     input.permissions.users.push('invalid-permission');
-    const exec = async () => ManageUserPermissionsService(repository, input);
     await expect(exec).rejects.toThrow();
   });
 });
