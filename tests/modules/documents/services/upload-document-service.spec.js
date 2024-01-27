@@ -43,7 +43,7 @@ describe('upload-document-service.spec', () => {
       input,
     );
 
-    expect(result.id).toBeDefined();
+    expect(result.documentId).toBeDefined();
     expect(result.url).toBeDefined();
   });
 

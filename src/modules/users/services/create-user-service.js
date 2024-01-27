@@ -12,7 +12,7 @@ async function CreateUserService(repository, notificationProvider, input) {
   await repository.save(user);
   await notificationProvider.sign(user);
 
-  return { id: user.id };
+  return { userId: user.id };
 }
 
 export default CreateUserService;

@@ -56,4 +56,14 @@ describe('user-repository.test', () => {
     expect(spyFindOne).toHaveBeenCalled();
     expect(userFromDb._id).toBeDefined();
   });
+
+  it('should be find one user', async () => {
+    const spyFindOne = jest.spyOn(UserModel, 'findOne');
+
+    await repository.save(user);
+    const userFromDb = await repository.findById(user.id);
+
+    expect(spyFindOne).toHaveBeenCalled();
+    expect(userFromDb._id).toBeDefined();
+  });
 });

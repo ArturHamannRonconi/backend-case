@@ -16,7 +16,7 @@ async function UploadDocumentService(repository, uploadProvider, notificationPro
   await notificationProvider.notify(user, Notification.UPLOAD);
 
   return {
-    id: document.id,
+    documentId: document.id,
     url,
   };
 }

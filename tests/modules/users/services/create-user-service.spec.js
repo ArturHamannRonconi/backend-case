@@ -24,9 +24,9 @@ describe('create-user-service.spec', () => {
     const saveSpy = jest.spyOn(repository, 'save');
     const findByEmailSpy = jest.spyOn(repository, 'findByEmail');
 
-    const userId = await CreateUserService(repository, notificationProvider, input);
+    const result = await CreateUserService(repository, notificationProvider, input);
 
-    expect(userId.id).toBeDefined();
+    expect(result.userId).toBeDefined();
     expect(saveSpy).toHaveBeenCalled();
     expect(findByEmailSpy).toHaveBeenCalledWith(input.email);
   });

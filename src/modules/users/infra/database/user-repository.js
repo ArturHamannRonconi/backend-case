@@ -2,6 +2,13 @@ import UserModel from './user-model.js';
 
 function UserRepository() {
   return {
+    findById: async (id) => {
+      const user = await UserModel.findOne({ id });
+      if (!user) return null;
+
+      return user;
+    },
+
     findByEmail: async (email) => {
       const user = await UserModel.findOne({ email });
       if (!user) return null;
