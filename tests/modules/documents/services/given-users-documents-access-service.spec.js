@@ -3,9 +3,9 @@ import { expect, jest } from '@jest/globals';
 import DocumentRepositoryMock from '../infra/document-repository.mock.js';
 import CreateUserEntity from '../../../../src/modules/users/domain/create-user-entity.js';
 import CreateDocumentEntity from '../../../../src/modules/documents/domain/create-document-entity.js';
-import GivenUserDocumentAccessService from '../../../../src/modules/documents/services/given-user-document-access-service.js';
+import GivenUsersDocumentsAccessService from '../../../../src/modules/documents/services/given-users-documents-access-service.js';
 
-describe('given-user-document-access-service.spec', () => {
+describe('given-users-documents-access-service.spec', () => {
   let input;
   let repository;
 
@@ -46,14 +46,14 @@ describe('given-user-document-access-service.spec', () => {
   it('should be call save 2 times', async () => {
     const spySave = jest.spyOn(repository, 'save');
 
-    await GivenUserDocumentAccessService(repository, input);
+    await GivenUsersDocumentsAccessService(repository, input);
 
     expect(spySave).toHaveBeenCalledTimes(3);
   });
 
   it('should be fail if user is not creator', async () => {
     input.creator.id = '321';
-    const exec = async () => GivenUserDocumentAccessService(repository, input);
+    const exec = async () => GivenUsersDocumentsAccessService(repository, input);
 
     await expect(exec).rejects.toThrow();
   });
