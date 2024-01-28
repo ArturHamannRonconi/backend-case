@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 import { uid } from 'uid';
-import { jest } from '@jest/globals';
+import { expect, jest } from '@jest/globals';
 
 import '../../../../src/shared/config/database-connection.js';
 import LegalType from '../../../../src/shared/utils/legal-type.js';
@@ -64,5 +64,30 @@ describe('document-repository.test', () => {
     expect(manyUsers[1]).toBeDefined();
     expect(manyUsers[0].password).toBeUndefined();
     expect(manyUsers[1].password).toBeUndefined();
+  });
+
+  it('should be find many by ids', async () => {
+    const url = 'http://url.com';
+    const fileName = 'filename.json';
+    const file = {
+      size: 800,
+      mimetype: 'json',
+    };
+
+    const documents = [
+      CreateDocumentEntity({
+        user, url, fileName, file,
+      }),
+      CreateDocumentEntity({
+        user, url, fileName, file,
+      }),
+      CreateDocumentEntity({
+        user, url, fileName, file,
+      }),
+    ];
+
+    const documentIds = documents.map((doc) => doc.id);
+    const documentsFromDb = await repository.findManyByIds(documentIds);
+    expect(documentsFromDb).toBeDefined();
   });
 });

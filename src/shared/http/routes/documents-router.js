@@ -8,6 +8,7 @@ import FileIntegrityMiddleware from '../middlewares/file-integrity-middleware.js
 import AuthenticationMiddleware from '../middlewares/authentication-middleware.js';
 import UploadDocumentController from '../../../modules/documents/infra/controllers/upload-document-controller.js';
 import ReadUserDocumentsController from '../../../modules/documents/infra/controllers/read-user-documents-controller.js';
+import GivenUserDocumentAccessController from '../../../modules/documents/infra/controllers/given-user-document-access-controller.js';
 
 const documentsRouter = Router();
 
@@ -20,6 +21,17 @@ documentsRouter.get(
   }),
   ReadUserDocumentsController,
 );
+
+documentsRouter
+  .patch(
+    '/user-access',
+    AuthenticationMiddleware,
+    AuthorizationMiddleware({
+      action: Permission.UPDATE,
+      resource: Resource.DOCUMENTS,
+    }),
+    GivenUserDocumentAccessController,
+  );
 
 documentsRouter.post(
   '/',

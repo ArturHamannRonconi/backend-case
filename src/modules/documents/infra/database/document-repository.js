@@ -23,6 +23,15 @@ function DocumentRepository() {
 
       return documents;
     },
+
+    findManyByIds: async (ids) => {
+      const documents = await DocumentModel.find({
+        id: { $in: ids },
+      }, { __v: false, _id: false });
+
+      return documents;
+    },
+
   };
 }
 
