@@ -9,6 +9,15 @@ function UserRepository() {
       return user;
     },
 
+    findManyByIds: async (ids) => {
+      const users = await UserModel.find(
+        { id: { $in: ids } },
+        { __v: false, _id: false },
+      );
+
+      return users;
+    },
+
     findByEmail: async (email) => {
       const user = await UserModel.findOne({ email }, { __v: false, _id: false });
       if (!user) return null;

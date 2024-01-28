@@ -6,6 +6,7 @@ function UserRepositoryMock(fns) {
     findAll: fns?.findAll ?? jest.fn(),
     findById: fns?.findById ?? jest.fn(),
     findByEmail: fns?.findByEmail ?? jest.fn(),
+    findManyByIds: fns?.findManyByIds ?? jest.fn(),
   };
 }
 
