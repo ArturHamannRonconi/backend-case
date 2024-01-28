@@ -54,7 +54,7 @@ describe('user-repository.test', () => {
     const userFromDb = await repository.findByEmail(user.email);
 
     expect(spyFindOne).toHaveBeenCalled();
-    expect(userFromDb._id).toBeDefined();
+    expect(userFromDb.id).toBeDefined();
   });
 
   it('should be find one user', async () => {
@@ -64,7 +64,7 @@ describe('user-repository.test', () => {
     const userFromDb = await repository.findById(user.id);
 
     expect(spyFindOne).toHaveBeenCalled();
-    expect(userFromDb._id).toBeDefined();
+    expect(userFromDb.id).toBeDefined();
   });
 
   it('should be find all', async () => {
@@ -74,7 +74,7 @@ describe('user-repository.test', () => {
     const manyUsers = await repository.findAll(user.id);
 
     expect(spyFind).toHaveBeenCalled();
-    expect(manyUsers[0]._id).toBeDefined();
-    expect(manyUsers[1]._id).toBeDefined();
+    expect(manyUsers[0].id).toBeDefined();
+    expect(manyUsers[1].id).toBeDefined();
   });
 });

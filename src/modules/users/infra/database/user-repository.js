@@ -3,21 +3,21 @@ import UserModel from './user-model.js';
 function UserRepository() {
   return {
     findById: async (id) => {
-      const user = await UserModel.findOne({ id });
+      const user = await UserModel.findOne({ id }, { __v: false, _id: false });
       if (!user) return null;
 
       return user;
     },
 
     findByEmail: async (email) => {
-      const user = await UserModel.findOne({ email });
+      const user = await UserModel.findOne({ email }, { __v: false, _id: false });
       if (!user) return null;
 
       return user;
     },
 
     findAll: async () => {
-      const users = await UserModel.find({}, { password: 0 });
+      const users = await UserModel.find({}, { password: 0, __v: false, _id: false });
       return users;
     },
 

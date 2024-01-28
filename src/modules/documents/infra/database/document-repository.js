@@ -19,7 +19,7 @@ function DocumentRepository() {
           { creatorId: user.id },
           { userIdsCanAccess: user.id },
         ],
-      });
+      }, { __v: false, _id: false });
 
       return documents;
     },
