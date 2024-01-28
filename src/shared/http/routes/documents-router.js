@@ -7,8 +7,19 @@ import AuthorizationMiddleware from '../middlewares/authorization-middleware.js'
 import FileIntegrityMiddleware from '../middlewares/file-integrity-middleware.js';
 import AuthenticationMiddleware from '../middlewares/authentication-middleware.js';
 import UploadDocumentController from '../../../modules/documents/infra/controllers/upload-document-controller.js';
+import ReadUserDocumentsController from '../../../modules/documents/infra/controllers/read-user-documents-controller.js';
 
 const documentsRouter = Router();
+
+documentsRouter.get(
+  '/',
+  AuthenticationMiddleware,
+  AuthorizationMiddleware({
+    action: Permission.READ,
+    resource: Resource.DOCUMENTS,
+  }),
+  ReadUserDocumentsController,
+);
 
 documentsRouter.post(
   '/',

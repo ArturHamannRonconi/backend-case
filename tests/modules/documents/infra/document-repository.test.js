@@ -17,8 +17,9 @@ describe('document-repository.test', () => {
     repository = DocumentRepository();
   });
 
+  const user = { id: uid(16) };
+
   beforeEach(async () => {
-    const user = { id: uid(16) };
     const url = 'http://url.com';
     const fileName = 'filename.json';
     const file = {
@@ -52,5 +53,16 @@ describe('document-repository.test', () => {
     await repository.save(document);
 
     expect(spyReplaceOne).toHaveBeenCalled();
+  });
+
+  it('should be find by user creator', async () => {
+    const spyFind = jest.spyOn(DocumentModel, 'find');
+
+    const manyUsers = await repository.findByUserAccess(user);
+    expect(spyFind).toHaveBeenCalled();
+    expect(manyUsers[0]).toBeDefined();
+    expect(manyUsers[1]).toBeDefined();
+    expect(manyUsers[0].password).toBeUndefined();
+    expect(manyUsers[1].password).toBeUndefined();
   });
 });

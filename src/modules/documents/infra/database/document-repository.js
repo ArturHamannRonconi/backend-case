@@ -12,6 +12,17 @@ function DocumentRepository() {
         await DocumentModel.create(document);
       }
     },
+
+    findByUserAccess: async (user) => {
+      const documents = await DocumentModel.find({
+        $or: [
+          { creatorId: user.id },
+          { userIdsCanAccess: user.id },
+        ],
+      });
+
+      return documents;
+    },
   };
 }
 

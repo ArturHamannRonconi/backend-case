@@ -66,4 +66,15 @@ describe('user-repository.test', () => {
     expect(spyFindOne).toHaveBeenCalled();
     expect(userFromDb._id).toBeDefined();
   });
+
+  it('should be find all', async () => {
+    const spyFind = jest.spyOn(UserModel, 'find');
+
+    await repository.save(user);
+    const manyUsers = await repository.findAll(user.id);
+
+    expect(spyFind).toHaveBeenCalled();
+    expect(manyUsers[0]._id).toBeDefined();
+    expect(manyUsers[1]._id).toBeDefined();
+  });
 });

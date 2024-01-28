@@ -16,6 +16,11 @@ function UserRepository() {
       return user;
     },
 
+    findAll: async () => {
+      const users = await UserModel.find({}, { password: 0 });
+      return users;
+    },
+
     save: async (user) => {
       const filterId = { id: user.id };
       const exists = await UserModel.exists(filterId);

@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand ",
+    "test": "ENVIRONMENT=test node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand ",
     "test:unit": "yarn test --config ./jest.unit.json",
     "test:cov:unit": "yarn test:unit --coverage",
     "pretest:integration": "yarn database:clear",

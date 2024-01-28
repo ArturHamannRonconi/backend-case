@@ -1,26 +1,17 @@
 import StatusCode from '../../../../shared/utils/status-code.js';
 import DocumentRepository from '../database/document-repository.js';
-import UploadProvider from '../../../../shared/providers/upload-provider.js';
-import UploadDocumentService from '../../services/upload-document-service.js';
-import NotificationProvider from '../../../../shared/providers/notification-provider.js';
+import ReadUserDocumentsService from '../../services/read-user-documents-service.js';
 
 async function ReadUserDocumentsController(request, response) {
-  const { user, file } = request;
+  const { user } = request;
 
   const repository = DocumentRepository();
-  const uploadProvider = UploadProvider();
-  const notificationProvider = NotificationProvider();
-  const input = { user, file };
+  const input = { user };
 
-  const output = await UploadDocumentService(
-    repository,
-    uploadProvider,
-    notificationProvider,
-    input,
-  );
+  const output = await ReadUserDocumentsService(repository, input);
 
   return response
-    .status(StatusCode.CREATED)
+    .status(StatusCode.OK)
     .json(output);
 }
 
