@@ -3,6 +3,8 @@ import InvalidParam from '../../../shared/http/errors/invalid-param.js';
 import IsValidParamType from '../../../shared/utils/is-valid-param-type.js';
 import Notification from '../../../shared/utils/notification.js';
 import Param from '../../../shared/utils/param.js';
+import Permission from '../../../shared/utils/permission.js';
+import CreateChangeLogEntity from '../domain/create-change-log-entity.js';
 
 async function GivenUsersDocumentsAccessService(
   userRepository,
@@ -34,7 +36,15 @@ async function GivenUsersDocumentsAccessService(
   const truthyUserIds = users.map((user) => user.id);
 
   documents.forEach(async (document) => {
+    const changeLog = CreateChangeLogEntity({
+      user: creator,
+      action: Permission.UPDATE,
+      description: 'given users access',
+    });
+
+    document.changeLogs.push(changeLog);
     document.userIdsCanAccess.push(...truthyUserIds);
+
     await documentRepository.save(documents);
   });
 

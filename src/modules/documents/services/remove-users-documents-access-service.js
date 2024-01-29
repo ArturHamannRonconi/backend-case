@@ -3,6 +3,8 @@ import Notification from '../../../shared/utils/notification.js';
 import InvalidParam from '../../../shared/http/errors/invalid-param.js';
 import IsValidParamType from '../../../shared/utils/is-valid-param-type.js';
 import ForbiddenAccess from '../../../shared/http/errors/forbidden-access.js';
+import Permission from '../../../shared/utils/permission.js';
+import CreateChangeLogEntity from '../domain/create-change-log-entity.js';
 
 async function RemoveUsersDocumentsAccessService(
   userRepository,
@@ -36,6 +38,13 @@ async function RemoveUsersDocumentsAccessService(
     const truthyUserIds = users.map((user) => user.id);
     const indexes = truthyUserIds.map((id) => document.userIdsCanAccess.indexOf(id));
 
+    const changeLog = CreateChangeLogEntity({
+      user: creator,
+      action: Permission.UPDATE,
+      description: 'remove users access',
+    });
+
+    document.changeLogs.push(changeLog);
     indexes.forEach((index) => {
       document.userIdsCanAccess.splice(index, 1);
     });

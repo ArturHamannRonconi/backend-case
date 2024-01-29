@@ -5,6 +5,7 @@ const DocumentModel = model('DocumentModel', new Schema({
   url: String,
   size: Number,
   name: String,
+  originalName: String,
   createdAt: Date,
   mimeType: String,
   legalType: String,
@@ -14,6 +15,7 @@ const DocumentModel = model('DocumentModel', new Schema({
     id: String,
     action: String,
     userId: String,
+    description: String,
     updatedAt: Date,
   }],
 }, { collection: 'documents' }));
