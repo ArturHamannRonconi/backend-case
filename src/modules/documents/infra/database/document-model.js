@@ -10,6 +10,7 @@ const DocumentModel = model('DocumentModel', new Schema({
   mimeType: String,
   legalType: String,
   creatorId: String,
+  deleteMarkerId: String,
   currentVersionId: String,
   nonCurrentVersionIds: [String],
   userIdsCanAccess: [String],

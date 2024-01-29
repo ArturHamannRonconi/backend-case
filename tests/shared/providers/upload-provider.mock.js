@@ -5,7 +5,7 @@ function UploadProviderMock(fns) {
     upload: fns?.upload ?? jest.fn(),
     update: fns?.update ?? jest.fn(),
     getUrl: fns?.getUrl ?? jest.fn(),
-    addDeleteMarker: fns?.addDeleteMarker ?? jest.fn(),
+    softDelete: fns?.softDelete ?? jest.fn(),
   };
 }
 

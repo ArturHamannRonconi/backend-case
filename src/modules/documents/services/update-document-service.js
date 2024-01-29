@@ -14,7 +14,7 @@ async function UpdateDocumentService(repository, uploadProvider, notificationPro
   const document = await repository.findById(documentId);
 
   const userHasDocumentAccess = document.creatorId === user.id
-  || document.userIdsCanAccess.includes(user.id);
+    || document.userIdsCanAccess.includes(user.id);
 
   if (!userHasDocumentAccess) throw ForbiddenAccess();
 

@@ -1,5 +1,7 @@
 const Notification = {
   UPLOAD: 'upload',
+  YOU_RESTORE_A_DOCUMENT: 'you-restore-a-document',
+  YOU_SOFT_DELETED_A_DOCUMENT: 'you-soft-deleted-a-document',
   YOU_CHANGED_USER_PERMISSIONS: 'you-changed-user-permissions',
   USER_CHANGED_YOUR_PERMISSIONS: 'user-changed-your-permissions',
   YOU_GIVEN_USERS_ACCESS_TO_DOCUMENTS: 'you-given-users-access-to-documents',

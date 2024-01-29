@@ -1,7 +1,7 @@
 import { uid } from 'uid';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import {
-  S3Client, PutObjectCommand, DeleteObjectCommand, GetObjectCommand,
+  S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand,
 } from '@aws-sdk/client-s3';
 
 import {
@@ -13,7 +13,6 @@ import UploadFail from '../http/errors/upload-fail.js';
 function UploadProvider() {
   const client = new S3Client({
     region: AWS_REGION,
-    systemClockOffset: true,
     credentials: {
       accessKeyId: AWS_SECRET_ACCESS_KEY_ID,
       secretAccessKey: AWS_SECRET_ACCESS_KEY,
@@ -52,11 +51,21 @@ function UploadProvider() {
       }
     },
 
-    addDeleteMarker: async (fileName, VersionId) => {
+    softDelete: async (fileName) => {
       const command = new DeleteObjectCommand({
-        VersionId,
         Key: fileName,
         Bucket: BUCKET_NAME,
+      });
+
+      const object = await client.send(command);
+      return object.VersionId;
+    },
+
+    restoreDocument: async (document) => {
+      const command = new DeleteObjectCommand({
+        Key: document.name,
+        Bucket: BUCKET_NAME,
+        VersionId: document.deleteMarkerId,
       });
 
       await client.send(command);

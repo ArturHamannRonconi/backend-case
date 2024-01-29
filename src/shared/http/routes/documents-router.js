@@ -11,6 +11,8 @@ import ReadUserDocumentsController from '../../../modules/documents/infra/contro
 import GivenUsersDocumentsAccessController from '../../../modules/documents/infra/controllers/given-users-documents-access-controller.js';
 import RemoveUsersDocumentsAccessController from '../../../modules/documents/infra/controllers/remove-users-documents-access-controller.js';
 import UpdateDocumentController from '../../../modules/documents/infra/controllers/update-document-controller.js';
+import SoftDeleteDocumentController from '../../../modules/documents/infra/controllers/soft-delete-document-controller.js';
+import RestoreDocumentController from '../../../modules/documents/infra/controllers/restore-document-controller.js';
 
 const documentsRouter = Router();
 
@@ -22,6 +24,16 @@ documentsRouter.get(
     resource: Resource.DOCUMENTS,
   }),
   ReadUserDocumentsController,
+);
+
+documentsRouter.delete(
+  '/',
+  AuthenticationMiddleware,
+  AuthorizationMiddleware({
+    action: Permission.DELETE,
+    resource: Resource.DOCUMENTS,
+  }),
+  SoftDeleteDocumentController,
 );
 
 documentsRouter
@@ -50,6 +62,10 @@ documentsRouter.put(
   '/:documentId',
   AuthenticationMiddleware,
   AuthorizationMiddleware({
+    action: Permission.CREATE,
+    resource: Resource.DOCUMENTS,
+  }),
+  AuthorizationMiddleware({
     action: Permission.UPDATE,
     resource: Resource.DOCUMENTS,
   }),
@@ -68,6 +84,20 @@ documentsRouter.post(
   UploadMiddleware(),
   FileIntegrityMiddleware(),
   UploadDocumentController,
+);
+
+documentsRouter.post(
+  '/restore',
+  AuthenticationMiddleware,
+  AuthorizationMiddleware({
+    action: Permission.DELETE,
+    resource: Resource.DOCUMENTS,
+  }),
+  AuthorizationMiddleware({
+    action: Permission.UPDATE,
+    resource: Resource.DOCUMENTS,
+  }),
+  RestoreDocumentController,
 );
 
 export default documentsRouter;
