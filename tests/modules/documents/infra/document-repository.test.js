@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 import { uid } from 'uid';
-import { expect, jest } from '@jest/globals';
+import { expect, it, jest } from '@jest/globals';
 
 import '../../../../src/shared/config/database-connection.js';
 import LegalType from '../../../../src/shared/utils/legal-type.js';
@@ -22,13 +22,18 @@ describe('document-repository.test', () => {
   beforeEach(async () => {
     const url = 'http://url.com';
     const fileName = 'filename.json';
+    const VersionId = uid(32);
     const file = {
       size: 800,
       mimetype: 'json',
     };
 
     document = CreateDocumentEntity({
-      user, url, fileName, file,
+      url,
+      user,
+      file,
+      fileName,
+      VersionId,
     });
   });
 
@@ -74,20 +79,44 @@ describe('document-repository.test', () => {
       mimetype: 'json',
     };
 
+    const VersionId1 = uid(32);
+    const VersionId2 = uid(32);
+    const VersionId3 = uid(32);
+
     const documents = [
       CreateDocumentEntity({
-        user, url, fileName, file,
+        url,
+        user,
+        file,
+        fileName,
+        VersionId1,
       }),
       CreateDocumentEntity({
-        user, url, fileName, file,
+        url,
+        user,
+        file,
+        fileName,
+        VersionId2,
       }),
       CreateDocumentEntity({
-        user, url, fileName, file,
+        url,
+        user,
+        file,
+        fileName,
+        VersionId3,
       }),
     ];
 
     const documentIds = documents.map((doc) => doc.id);
     const documentsFromDb = await repository.findManyByIds(documentIds);
     expect(documentsFromDb).toBeDefined();
+  });
+
+  it('should be find by id', async () => {
+    await repository.save(document);
+
+    const documentFromDb = await repository.findById(document.id);
+    expect(documentFromDb.id).toEqual(document.id);
+    expect(documentFromDb.name).toEqual(document.name);
   });
 });

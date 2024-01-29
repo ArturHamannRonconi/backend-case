@@ -14,8 +14,8 @@ async function GivenUsersDocumentsAccessController(request, response) {
   const input = { creator: user, userIds, documentIds };
 
   const output = await GivenUsersDocumentsAccessService(
-    documentRepository,
     userRepository,
+    documentRepository,
     notificationProvider,
     input,
   );

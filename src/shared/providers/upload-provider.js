@@ -1,6 +1,8 @@
 import { uid } from 'uid';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import {
+  S3Client, PutObjectCommand, DeleteObjectCommand, GetObjectCommand,
+} from '@aws-sdk/client-s3';
 
 import {
   AWS_REGION, AWS_SECRET_ACCESS_KEY, AWS_SECRET_ACCESS_KEY_ID, BUCKET_NAME,
@@ -28,12 +30,36 @@ function UploadProvider() {
           Body: document.buffer,
         });
 
-        await client.send(command);
-
-        return Key;
+        const object = await client.send(command);
+        return { Key, VersionId: object.VersionId };
       } catch (error) {
         throw UploadFail();
       }
+    },
+
+    update: async (fileName, buffer) => {
+      try {
+        const command = new PutObjectCommand({
+          Body: buffer,
+          Key: fileName,
+          Bucket: BUCKET_NAME,
+        });
+
+        const object = await client.send(command);
+        return object.VersionId;
+      } catch (error) {
+        throw UploadFail();
+      }
+    },
+
+    addDeleteMarker: async (fileName, VersionId) => {
+      const command = new DeleteObjectCommand({
+        VersionId,
+        Key: fileName,
+        Bucket: BUCKET_NAME,
+      });
+
+      await client.send(command);
     },
 
     getUrl: async (Key) => {

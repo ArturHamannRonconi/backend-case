@@ -45,7 +45,7 @@ async function GivenUsersDocumentsAccessService(
     document.changeLogs.push(changeLog);
     document.userIdsCanAccess.push(...truthyUserIds);
 
-    await documentRepository.save(documents);
+    await documentRepository.save(document);
   });
 
   await notificationProvider.notify(creator, Notification.YOU_GIVEN_USERS_ACCESS_TO_DOCUMENTS);

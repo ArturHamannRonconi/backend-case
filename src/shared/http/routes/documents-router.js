@@ -10,6 +10,7 @@ import UploadDocumentController from '../../../modules/documents/infra/controlle
 import ReadUserDocumentsController from '../../../modules/documents/infra/controllers/read-user-documents-controller.js';
 import GivenUsersDocumentsAccessController from '../../../modules/documents/infra/controllers/given-users-documents-access-controller.js';
 import RemoveUsersDocumentsAccessController from '../../../modules/documents/infra/controllers/remove-users-documents-access-controller.js';
+import UpdateDocumentController from '../../../modules/documents/infra/controllers/update-document-controller.js';
 
 const documentsRouter = Router();
 
@@ -44,6 +45,18 @@ documentsRouter
     }),
     RemoveUsersDocumentsAccessController,
   );
+
+documentsRouter.put(
+  '/:documentId',
+  AuthenticationMiddleware,
+  AuthorizationMiddleware({
+    action: Permission.UPDATE,
+    resource: Resource.DOCUMENTS,
+  }),
+  UploadMiddleware(),
+  FileIntegrityMiddleware(),
+  UpdateDocumentController,
+);
 
 documentsRouter.post(
   '/',

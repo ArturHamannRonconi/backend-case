@@ -7,10 +7,10 @@
     "start": "node src/server.js",
     "test": "ENVIRONMENT=test node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand ",
     "test:unit": "yarn test --config ./jest.unit.json",
-    "test:cov:unit": "yarn test:unit --coverage",
+    "test:unit:coverage": "yarn test:unit --coverage",
     "pretest:integration": "yarn database:clear",
     "test:integration": "yarn test --config ./jest.integration.json",
-    "test:cov:integration": "yarn test:integration --coverage",
+    "test:integration:coverage": "yarn test:integration --coverage",
     "posttest:integration": "yarn database:clear",
     "database:clear": "docker compose down && docker volume prune -f && docker compose up -d"
   },

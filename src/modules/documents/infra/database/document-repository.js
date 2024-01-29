@@ -32,6 +32,13 @@ function DocumentRepository() {
       return documents;
     },
 
+    findById: async (id) => {
+      const document = await DocumentModel
+        .findOne({ id }, { __v: false, _id: false });
+
+      return document;
+    },
+
   };
 }
 

@@ -14,8 +14,8 @@ async function RemoveUsersDocumentsAccessController(request, response) {
   const input = { creator: user, userIds, documentIds };
 
   const output = await RemoveUsersDocumentsAccessService(
-    documentRepository,
     userRepository,
+    documentRepository,
     notificationProvider,
     input,
   );

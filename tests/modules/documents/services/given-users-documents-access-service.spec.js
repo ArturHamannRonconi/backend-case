@@ -1,5 +1,6 @@
 import { expect, jest } from '@jest/globals';
 
+import { uid } from 'uid';
 import DocumentRepositoryMock from '../infra/document-repository.mock.js';
 import UserRepositoryMock from '../../users/infra/user-repository.mock.js';
 import CreateUserEntity from '../../../../src/modules/users/domain/create-user-entity.js';
@@ -26,9 +27,14 @@ describe('given-users-documents-access-service.spec', () => {
       size: 800,
       mimetype: 'json',
     };
+    const VersionId = uid(32);
 
     const document = CreateDocumentEntity({
-      user, url, fileName, file,
+      url,
+      user,
+      file,
+      fileName,
+      VersionId,
     });
 
     input = {

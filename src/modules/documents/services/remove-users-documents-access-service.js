@@ -49,7 +49,7 @@ async function RemoveUsersDocumentsAccessService(
       document.userIdsCanAccess.splice(index, 1);
     });
 
-    await documentRepository.save(documents);
+    await documentRepository.save(document);
   });
 
   await notificationProvider.notify(creator, Notification.YOU_REMOVE_USERS_ACCESS_FROM_DOCUMENTS);

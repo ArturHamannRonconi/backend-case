@@ -7,13 +7,14 @@ describe('create-document-entity.spec', () => {
     const user = { id: uid(16) };
     const url = 'http://url.com';
     const fileName = 'filename.json';
+    const VersionId = uid(32);
     const file = {
       size: 800,
       mimetype: 'json',
     };
 
     const document = CreateDocumentEntity({
-      user, url, fileName, file,
+      user, url, fileName, file, VersionId,
     });
 
     expect(document.id).toBeDefined();

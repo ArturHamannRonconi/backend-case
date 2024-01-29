@@ -1,4 +1,3 @@
-import { expect } from '@jest/globals';
 import UploadProvider from '../../../src/shared/providers/upload-provider.js';
 
 describe('upload-provider.test', () => {
@@ -14,13 +13,20 @@ describe('upload-provider.test', () => {
       originalname: 'file',
       buffer: Buffer.from('file'),
     };
+    const { Key, VersionId } = await provider.upload(document);
+    key = Key;
 
-    key = await provider.upload(document);
-    expect(key).toBeDefined();
+    expect(Key).toBeDefined();
+    expect(VersionId).toBeDefined();
   });
 
-  it('should be upload', async () => {
+  it('should be get url', async () => {
     const url = await provider.getUrl(key);
     expect(url).toBeDefined();
+  });
+
+  it('should be update a document', async () => {
+    const VersionId = await provider.update(key, Buffer.from('file-2'));
+    expect(VersionId).toBeDefined();
   });
 });
