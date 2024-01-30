@@ -1,0 +1,9 @@
+{
+  "rootDir": "tests",
+  "testTimeout": 500000,
+  "testEnvironment": "node",
+  "testRegex": ".*\\.test\\.js$",
+  "moduleFileExtensions": ["js"],
+  "testPathIgnorePatterns": ["<rootDir>/build/", "<rootDir>/node_modules/"],
+  "transform": {}
+}

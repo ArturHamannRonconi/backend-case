@@ -1,3 +1,8 @@
+# Links do projeto finalizado
+  - [Repositório](https://github.com/ArturHamannRonconi/backend-case)
+  - [Documentação Oficial](https://magnificent-windshield-5b2.notion.site/Backend-case-f43ba9d684db4ecdbb0a40cb249d4662)
+  - [API Online](http://ec2-52-91-81-174.compute-1.amazonaws.com/api/v1/health-checker)
+
 # Case para Desenvolvedor Backend: API de Gerenciamento de Documentos Jurídicos
 
 ## Olá, Caro Desenvolvedor!
