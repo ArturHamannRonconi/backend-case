@@ -1,8 +1,10 @@
+import { expect } from '@jest/globals';
 import UploadProvider from '../../../src/shared/providers/upload-provider.js';
 
 describe('upload-provider.test', () => {
   let key;
   let provider;
+  let deleteMarker;
 
   beforeAll(() => {
     provider = UploadProvider();
@@ -28,5 +30,19 @@ describe('upload-provider.test', () => {
   it('should be update a document', async () => {
     const VersionId = await provider.update(key, Buffer.from('file-2'));
     expect(VersionId).toBeDefined();
+  });
+
+  it('should be soft delete a document', async () => {
+    deleteMarker = await provider.softDelete(key);
+    expect(deleteMarker).toBeDefined();
+  });
+
+  it('should be restore document with sccess', async () => {
+    const result = await provider.restoreDocument({
+      name: key,
+      deleteMarker,
+    });
+
+    expect(result).toBeUndefined();
   });
 });

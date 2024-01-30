@@ -9,12 +9,8 @@ import ForbiddenAccess from '../../../shared/http/errors/forbidden-access.js';
 async function SoftDeleteDocumentService(repository, uploadProvider, notificationProvider, input) {
   const { documentId, user } = input;
 
-  const validations = [
-    IsValidParamType(documentId, Param.STRING),
-  ];
-
-  const hasInvalidParam = validations.some((valid) => !valid);
-  if (hasInvalidParam) return InvalidParam('ids', Param.STRING);
+  const hasInvalidParam = !IsValidParamType(documentId, Param.STRING);
+  if (hasInvalidParam) throw InvalidParam('documentId', Param.STRING);
 
   const document = await repository.findById(documentId);
   const userHasDocumentAccess = document.creatorId === user.id
